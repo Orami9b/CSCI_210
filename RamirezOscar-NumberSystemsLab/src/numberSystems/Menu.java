@@ -4,21 +4,31 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 
 /**
+ * The Menu class displays the options from which the user may select, and
+ *    prompts the user for input.
+ * @author Oscar Ramirez
+ * @version 1/29/20
  * 
- * @author oscar
- *
  */
 public class Menu
 {
     PrintWriter out;
     Scanner in;
     
+    /**
+     * Creates a Menu object with a reference to a PrintWriter object used for
+     * and initializes a Scanner object used for input
+     * @param out the PrintWriter object used for output
+     */
     public Menu(PrintWriter out)
     {
         this.out = out;
         in = new Scanner(System.in);
     }
     
+    /**
+     * Displays a menu with options from which the user will choose
+     */
     public void display()
     {
         String[] displayOptions = 
@@ -35,7 +45,17 @@ public class Menu
             out.println(displayOptions[i]);
         }
     }
+    
+    /**
+     * A sentinel value used for exiting the menu. Set to 7.
+     */
     private final int EXIT_VALUE = 7;
+    /**
+     * Prompts the user for input, checking that it's within range (1 - 7). When
+     * sentinel value is selected, the method will stop prompting the user and
+     * will close the Scanner object created at initialization.
+     * @return an integer 1 - 7 from user input
+     */
     public int getSelection()
     {
         String input = getInput();
@@ -50,6 +70,10 @@ public class Menu
         return selection;
     }
     
+    /**
+     * Prompts the user for input and returns next line from input as a String.
+     * @return next line from input as a String
+     */
     private String getInput()
     {
         promptSelection();
@@ -61,6 +85,9 @@ public class Menu
         return input;
     }
     
+    /**
+     * Prints a prompt message to the user and output file.
+     */
     private void promptSelection()
     {
         String promptSelectionMessage = "Enter an option (1 - 7): ";
@@ -68,6 +95,11 @@ public class Menu
         out.print(promptSelectionMessage);
     }
     
+    /**
+     * Checks if a given input is valid: an integer, and in range (1 - 7)
+     * @param input the input from user when prompted
+     * @return true if input is valid, otherwise false
+     */
     private Boolean isValidInput(String input)
     {
         Boolean isValidInput = true;
@@ -88,12 +120,20 @@ public class Menu
         return isValidInput;
     }
     
+    /**
+     * Prints an error message to the user and output file
+     * @param errorMessage the error the user encountered during input
+     */
     private void displayError(String errorMessage)
     {
         System.out.println(errorMessage);
         out.println(errorMessage);
     }
     
+    /**
+     * Prints a goodbye message to the user and output file, when the menu is
+     * finished being used
+     */
     private void displayGoodbye()
     {
         String goodbye = "Thank you. Goodbye!";
