@@ -107,13 +107,13 @@ public class Menu
         try {
             int value = Integer.parseInt(input);
             if (value < 1 || value > EXIT_VALUE) {
-                String errorMessage = "Input was not 1 - 7.";
+                String errorMessage = "Input is not 1 - 7.";
                 displayError(errorMessage);
                 isValidInput = false;
             }
         }
-        catch (Exception NumberFormatException) {
-            String errorMessage = "Input was not an integer.";
+        catch (NumberFormatException exception) {
+            String errorMessage = "Input is not an integer.";
             displayError(errorMessage);
             isValidInput = false;
         }
@@ -137,7 +137,7 @@ public class Menu
     private void displayGoodbye()
     {
         String goodbye = "Thank you. Goodbye!";
-        System.out.println(goodbye);
-        out.println(goodbye);
+        System.out.print(goodbye);
+        out.print(goodbye);
     }
 }
