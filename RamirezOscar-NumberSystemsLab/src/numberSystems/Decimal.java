@@ -18,18 +18,16 @@ public class Decimal
     private int dec;
     private StringBuilder bin;
     private StringBuilder hex;
-    private final int HEX_SIZE = 8;
     private final int BIN_FLAG = 0;
     private final int HEX_FLAG = 1;
-    private final int NIBBLE_SIZE = 4;
     
     public Decimal(PrintWriter out)
     {
         this.out = out;
         in = new Scanner(System.in);
         dec = -1;
-        bin = new StringBuilder(Integer.SIZE);
-        hex = new StringBuilder(HEX_SIZE);
+        bin = new StringBuilder();
+        hex = new StringBuilder();
     }
     
     public void decToBin()
@@ -83,15 +81,15 @@ public class Decimal
             Integer.parseUnsignedInt(input);
         }
         catch (NumberFormatException exception) {
-            String errorMessage = "Input is not an unsigned integer.";
-            displayError(errorMessage);
+            displayError();
             isValidInput = false;
         }
         return isValidInput;
     }
     
-    private void displayError(String errorMessage)
+    private void displayError()
     {
+        String errorMessage = "Input is not an unsigned integer.";
         System.out.println(errorMessage);
         out.println(errorMessage);
     }
@@ -123,7 +121,7 @@ public class Decimal
             bin = new StringBuilder(Integer.SIZE);
         }
         else {
-            hex = new StringBuilder(HEX_SIZE);
+            hex = new StringBuilder();
         }
     }
     
@@ -171,7 +169,8 @@ public class Decimal
             }
         }
         else {
-            while(hex.length() < HEX_SIZE) {
+            int hexSize = 8;
+            while(hex.length() < hexSize) {
                 hex.append(0);
             }
         }
@@ -179,8 +178,9 @@ public class Decimal
 
     private void addSpaces()
     {
-        for (int i = bin.length() - NIBBLE_SIZE; i >= NIBBLE_SIZE;
-                i -= NIBBLE_SIZE) {
+        int nibbleSize = 4;
+        for (int i = bin.length() - nibbleSize; i >= nibbleSize;
+                i -= nibbleSize) {
             bin.insert(i, " ");
         }
     }
